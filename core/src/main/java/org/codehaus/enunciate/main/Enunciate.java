@@ -852,7 +852,7 @@ public class Enunciate {
    * @throws EnunciateException if the compile fails.
    */
   public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {
-    invokeJavac(classpath, "1.7", compileDir, new ArrayList<String>(), sourceFiles);
+    invokeJavac(classpath, "7", compileDir, new ArrayList<String>(), sourceFiles);
   }
 
   /**
