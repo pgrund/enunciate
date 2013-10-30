@@ -22,10 +22,10 @@
     <module>jersey</module>
     <module>java-client</module>
     <module>c</module>
-    <module>obj-c</module>
+    <!--<module>obj-c</module>
     <module>csharp</module>
     <module>ruby</module>
-    <module>php</module>
+    <module>php</module>-->
     <module>swagger</module>
     <module>docs</module>
     <module>amf-rt</module>
@@ -53,7 +53,7 @@
     <module>maven-enunciate-jboss-plugin</module>
 
     <module>enunciate-simple-archetype</module>
-    <module>integration-tests</module>
+<!--    <module>integration-tests</module> -->
   </modules>
 
   <build>
