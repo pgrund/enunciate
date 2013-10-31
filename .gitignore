@@ -3,3 +3,10 @@
 *.ipr
 target
 cargo-installs
+
+
+.project
+.classpath
+*.bak
+*.swp
+.settings

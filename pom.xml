@@ -4,7 +4,7 @@
   <groupId>org.codehaus.enunciate</groupId>
   <artifactId>enunciate-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.27</version>
+  <version>1.27-java7-patched</version>
   <name>Enunciate - Parent</name>
 
   <modules>
@@ -22,10 +22,10 @@
     <module>jersey</module>
     <module>java-client</module>
     <module>c</module>
-    <!--<module>obj-c</module>
+    <module>obj-c</module>
     <module>csharp</module>
     <module>ruby</module>
-    <module>php</module>-->
+    <module>php</module>
     <module>swagger</module>
     <module>docs</module>
     <module>amf-rt</module>
