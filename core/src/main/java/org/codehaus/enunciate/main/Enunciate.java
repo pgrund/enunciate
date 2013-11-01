@@ -93,6 +93,12 @@ public class Enunciate {
   private String buildClasspath;
   private EnunciateConfiguration config;
   private Target target = Target.PACKAGE;
+  
+  //set version flags for javac
+  private static final String JAVAC_VERSION_DEFAULT = "1.5";
+  private String javacSourceVersion = JAVAC_VERSION_DEFAULT;
+  private String javacTargetVersion = JAVAC_VERSION_DEFAULT;
+  
   private final HashMap<String, Object> properties = new HashMap<String, Object>();
   private final Set<Artifact> artifacts = new TreeSet<Artifact>();
   private final HashMap<String, File> exports = new HashMap<String, File>();
@@ -854,26 +860,11 @@ public class Enunciate {
    */
   public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {
 	  
-	  //check systemPropertyVariables for javac version settings
-	  String javacSourceVersion = System.getProperty("javacSourceVersion");
-	  String javacTargetVersion = System.getProperty("javacTargetVersion");
-	  
 	  //print output to console for debug purposes
 	  System.out.format("Source Version: %s\n", javacSourceVersion);
 	  System.out.format("Target Version: %s\n", javacTargetVersion);  
 	  
-	  //default to java 1.5
-	  String version = null;
-	  if (javacTargetVersion == null)
-	  {
-		  version = "1.5";
-	  }
-	  else
-	  {
-		  version = javacTargetVersion;
-	  }
-	  
-	  invokeJavac(classpath, version, compileDir, new ArrayList<String>(), sourceFiles);
+	  invokeJavac(classpath, this.javacTargetVersion, compileDir, new ArrayList<String>(), sourceFiles);
   }
 
   /**
@@ -1565,6 +1556,26 @@ public class Enunciate {
    */
   public void setTarget(Target target) {
     this.target = target;
+  }
+  
+  /**
+   * Set javac -source version.
+   * 
+   * @param sourceVersion Value for javac -source flag.
+   */
+  public void setJavacSourceVersion (String version)
+  {
+	  this.javacSourceVersion = version;
+  }
+  
+  /**
+   * Set javac -target version.
+   * 
+   * @param targetVersion Value for javac -target flag.
+   */
+  public void setJavacTargetVersion (String version)
+  {
+	  this.javacTargetVersion = version;
   }
 
   /**
