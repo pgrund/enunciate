@@ -16,6 +16,7 @@
 
 package org.codehaus.enunciate.main;
 
+import org.apache.tools.ant.taskdefs.Java;
 import org.codehaus.enunciate.EnunciateException;
 import org.codehaus.enunciate.apt.EnunciateAnnotationProcessorFactory;
 import org.codehaus.enunciate.config.APIImport;
@@ -852,7 +853,27 @@ public class Enunciate {
    * @throws EnunciateException if the compile fails.
    */
   public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {
-    invokeJavac(classpath, "1.5", compileDir, new ArrayList<String>(), sourceFiles);
+	  
+	  //check systemPropertyVariables for javac version settings
+	  String javacSourceVersion = System.getProperty("javacSourceVersion");
+	  String javacTargetVersion = System.getProperty("javacTargetVersion");
+	  
+	  //print output to console for debug purposes
+	  System.out.format("Source Version: %s\n", javacSourceVersion);
+	  System.out.format("Target Version: %s\n", javacTargetVersion);  
+	  
+	  //default to java 1.5
+	  String version = null;
+	  if (javacTargetVersion == null)
+	  {
+		  version = "1.5";
+	  }
+	  else
+	  {
+		  version = javacTargetVersion;
+	  }
+	  
+	  invokeJavac(classpath, version, compileDir, new ArrayList<String>(), sourceFiles);
   }
 
   /**
