@@ -95,9 +95,8 @@ public class Enunciate {
   private Target target = Target.PACKAGE;
   
   //set version flags for javac
-  private static final String JAVAC_VERSION_DEFAULT = "1.5";
-  private String javacSourceVersion = JAVAC_VERSION_DEFAULT;
-  private String javacTargetVersion = JAVAC_VERSION_DEFAULT;
+  private String javacSourceVersion;
+  private String javacTargetVersion;
   
   private final HashMap<String, Object> properties = new HashMap<String, Object>();
   private final Set<Artifact> artifacts = new TreeSet<Artifact>();
@@ -858,13 +857,8 @@ public class Enunciate {
    * @param sourceFiles The source files.
    * @throws EnunciateException if the compile fails.
    */
-  public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {
-	  
-	  //print output to console for debug purposes
-	  System.out.format("Source Version: %s\n", javacSourceVersion);
-	  System.out.format("Target Version: %s\n", javacTargetVersion);  
-	  
-	  invokeJavac(classpath, this.javacTargetVersion, compileDir, new ArrayList<String>(), sourceFiles);
+  public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {	  	  
+	  invokeJavac(classpath, this.javacSourceVersion, this.javacTargetVersion, compileDir, new ArrayList<String>(), sourceFiles);
   }
 
   /**
@@ -876,7 +870,22 @@ public class Enunciate {
    * @param additionalArgs Any additional arguments to the compiler.
    * @param sourceFiles    The source files. @throws EnunciateException if the compile fails.
    */
-  public void invokeJavac(String classpath, String version, File compileDir, List<String> additionalArgs, String[] sourceFiles) throws EnunciateException {
+  public void invokeJavac(String classpath, String version, File compileDir, List<String> additionalArgs, String[] sourceFiles) throws EnunciateException
+  {
+	  invokeJavac(classpath, version, version, compileDir, additionalArgs, sourceFiles);
+  }
+  
+  /**
+   * Invokes javac on the specified source files.
+   *
+   * @param classpath      The classpath.
+   * @param sourceVersion  The value to use for javac's -source flag.
+   * @param targetVersion  The value to use for javac's -target flag.
+   * @param compileDir     The compile directory.
+   * @param additionalArgs Any additional arguments to the compiler.
+   * @param sourceFiles    The source files. @throws EnunciateException if the compile fails.
+   */
+  public void invokeJavac(String classpath, String sourceVersion, String targetVersion, File compileDir, List<String> additionalArgs, String[] sourceFiles) throws EnunciateException {
     if ((sourceFiles == null) || (sourceFiles.length == 0)) {
       warn("Skipping compile.  No source files specified.");
       return;
@@ -888,9 +897,9 @@ public class Enunciate {
     args.add(classpath);
 
     args.add("-source");
-    args.add(version);
+    args.add(sourceVersion);
     args.add("-target");
-    args.add(version);
+    args.add(targetVersion);
 
     if (isCompileDebugInfo()) {
       args.add("-g");
