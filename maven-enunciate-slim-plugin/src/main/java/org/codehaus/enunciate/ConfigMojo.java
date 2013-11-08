@@ -255,24 +255,18 @@ public class ConfigMojo extends AbstractMojo {
   private boolean javacCheck = false;
   
   /**
-   * Default version for javac.
+   * javac -source version parameter
    * 
+   * @parameter
    */
-  private static final String JAVAC_DEFAULT_VERSION = "1.5";
+  private String javacSourceVersion = null;
   
   /**
    * javac -source version parameter
    * 
    * @parameter
    */
-  private String javacSourceVersion = JAVAC_DEFAULT_VERSION;
-  
-  /**
-   * javac -source version parameter
-   * 
-   * @parameter
-   */
-  private String javacTargetVersion = JAVAC_DEFAULT_VERSION;
+  private String javacTargetVersion = null;
 
   /**
    * List of source directories that are enunciate-added.

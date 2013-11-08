@@ -95,6 +95,7 @@ public class Enunciate {
   private Target target = Target.PACKAGE;
   
   //set version flags for javac
+  private static final String JAVAC_DEFAULT_VERSION = "1.5";
   private String javacSourceVersion;
   private String javacTargetVersion;
   
@@ -857,8 +858,28 @@ public class Enunciate {
    * @param sourceFiles The source files.
    * @throws EnunciateException if the compile fails.
    */
-  public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {	  	  
-	  invokeJavac(classpath, this.javacSourceVersion, this.javacTargetVersion, compileDir, new ArrayList<String>(), sourceFiles);
+  public void invokeJavac(String classpath, File compileDir, String[] sourceFiles) throws EnunciateException {	  
+	  
+	  //check for null values
+	  if (this.javacSourceVersion == null && this.javacTargetVersion == null)
+	  {
+		  invokeJavac(classpath, JAVAC_DEFAULT_VERSION, compileDir, new ArrayList<String>(), sourceFiles);
+	  }
+	  else
+	  {
+		  //handle cases where only one flag is set
+		  if (this.javacSourceVersion == null)
+		  {
+			  this.javacSourceVersion = this.javacTargetVersion;
+		  }
+		  
+		  if (this.javacTargetVersion == null)
+		  {
+			  this.javacTargetVersion = this.javacSourceVersion;
+		  }
+		  
+		  invokeJavac(classpath, this.javacSourceVersion, this.javacTargetVersion, compileDir, new ArrayList<String>(), sourceFiles);
+	  }
   }
 
   /**
