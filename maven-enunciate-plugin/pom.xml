@@ -3,13 +3,14 @@
   <parent>
     <groupId>org.codehaus.enunciate</groupId>
     <artifactId>enunciate-parent</artifactId>
-    <version>1.27-java7-patched</version>
+    <version>1.27</version>
   </parent>
 
   <artifactId>maven-enunciate-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>Enunciate - Maven Plugin</name>
   <description>Maven 2 plugin for invoking Enunciate.</description>
+  <version>1.27-java7-patched</version>
 
   <build>
     <plugins>
@@ -33,7 +34,7 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>maven-enunciate-slim-plugin</artifactId>
       <type>maven-plugin</type>
-      <version>${project.version}</version>
+      <version>1.27-java7-patched</version>
     </dependency>
 
     <dependency>
@@ -77,13 +78,13 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>enunciate-core</artifactId>
-      <version>${project.version}</version>
+      <version>1.27-java7-patched</version>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>enunciate-top</artifactId>
-      <version>${project.version}</version>
+      <version>1.27</version>
     </dependency>
   </dependencies>
 

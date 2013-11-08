@@ -4,13 +4,14 @@
   <parent>
     <groupId>org.codehaus.enunciate</groupId>
     <artifactId>enunciate-parent</artifactId>
-    <version>1.27-java7-patched</version>
+    <version>1.27</version>
   </parent>
 
   <artifactId>maven-enunciate-slim-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>Enunciate - Slim Maven Plugin</name>
   <description>Slim Maven 2 plugin for invoking Enunciate.</description>
+  <version>1.27-java7-patched</version>
 
   <build>
     <plugins>
