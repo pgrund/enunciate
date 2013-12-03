@@ -39,6 +39,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import org.codehaus.enunciate.contract.jaxrs.ResponseCode;
 
 /**
  * <h1>Swagger Module</h1>
@@ -165,7 +166,7 @@ public class SwaggerDeploymentModule extends FreemarkerDeploymentModule implemen
                   facetsToDocs.put(facet.getValue(), facet.getDocumentation());
                 }
               }
-            }
+            }            
           }
         }
       }

@@ -16,6 +16,7 @@
 
 package org.codehaus.enunciate.modules.jersey;
 
+import com.sun.mirror.type.ReferenceType;
 import freemarker.template.TemplateException;
 import org.apache.commons.digester.RuleSet;
 import org.codehaus.enunciate.EnunciateException;
@@ -39,6 +40,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javax.ws.rs.WebApplicationException;
+
 
 /**
  * <h1>Jersey Module</h1>

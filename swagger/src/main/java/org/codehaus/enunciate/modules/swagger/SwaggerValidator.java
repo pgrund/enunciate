@@ -44,12 +44,12 @@ public class SwaggerValidator extends BaseValidator {
   private void validateTypeDefinition(TypeDefinition type, ValidationResult result) {
     for (Attribute attribute : type.getAttributes()) {
       if (attribute.getBaseType().isAnonymous()) {
-        result.addError(attribute, "Swagger isn't smart enough to handle anonymous types (such as maps).");
+        result.addError(attribute, "Swagger isn't smart enough to handle anonymous types as attributes (such as maps).");
       }
     }
 
     if (type.getValue() != null && type.getValue().getBaseType().isAnonymous()) {
-      result.addError(type.getValue(), "Swagger isn't smart enough to handle anonymous types (such as maps).");
+      result.addError(type.getValue(), "Swagger isn't smart enough to handle anonymous types as elements (such as maps).");
     }
 
     for (Element element : type.getElements()) {
@@ -59,7 +59,8 @@ public class SwaggerValidator extends BaseValidator {
 
       for (Element choice : element.getChoices()) {
         if (!choice.isElementRef() && choice.getBaseType().isAnonymous()) {
-          result.addError(choice, "Swagger isn't smart enough to handle anonymous types (such as maps).");
+            result.addWarning(choice, "Swagger isn't smart enough to handle anonymous types as choice(such as maps).");
+          //result.addError(choice, "Swagger isn't smart enough to handle anonymous types as choice(such as maps).");
         }
       }
     }

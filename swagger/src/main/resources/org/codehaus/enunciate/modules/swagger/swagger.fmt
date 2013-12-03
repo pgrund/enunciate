@@ -46,7 +46,7 @@
           "parameters" : [
         [#assign writeComma=false/]
         [#list resource.resourceParameters as parameter]
-          [#if parameter.queryParam || parameter.headerParam || parameter.pathParam || parameter.formParam]
+          [#if parameter.queryParam || parameter.headerParam || parameter.pathParam || parameter.formParam ]
             [#if writeComma]
             ,
             [/#if]

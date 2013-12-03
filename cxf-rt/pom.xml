@@ -12,7 +12,7 @@
   <description>The Enunciate CXF runtime libraries support the CXF-backed SOAP endpoints.</description>
 
   <properties>
-    <cxf.version>2.6.0</cxf.version>
+    <cxf.version>3.0.0-milestone1</cxf.version>
   </properties>
 
   <dependencies>
@@ -64,6 +64,12 @@
       <artifactId>jackson-xc</artifactId>
     </dependency>
 
+<dependency>
+   <groupId>org.apache.cxf</groupId>
+   <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+   <version>3.0.0-milestone1</version>
+</dependency>
+<!--
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-core</artifactId>
@@ -87,7 +93,7 @@
       <artifactId>cxf-rt-transports-http</artifactId>
       <version>${cxf.version}</version>
     </dependency>
-
+-->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>

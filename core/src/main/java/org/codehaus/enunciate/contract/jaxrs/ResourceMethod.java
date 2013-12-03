@@ -20,6 +20,7 @@ import com.sun.mirror.apt.AnnotationProcessorEnvironment;
 import com.sun.mirror.declaration.*;
 import com.sun.mirror.type.DeclaredType;
 import com.sun.mirror.type.MirroredTypeException;
+import com.sun.mirror.type.ReferenceType;
 import net.sf.jelly.apt.decorations.JavaDoc;
 import net.sf.jelly.apt.decorations.TypeMirrorDecorator;
 import net.sf.jelly.apt.decorations.declaration.DecoratedMethodDeclaration;
@@ -36,6 +37,7 @@ import javax.ws.rs.core.Context;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.ws.rs.core.Response;
 
 /**
  * A JAX-RS resource method.
@@ -254,7 +256,28 @@ public class ResourceMethod extends DecoratedMethodDeclaration implements HasFac
         statusCodes.add(rc);
       }
     }
-
+    // support WebapplicationException
+    for(ReferenceType rt : delegate.getThrownTypes()){     
+        String clazzname = rt.toString();
+        try {
+            Class c = Class.forName(clazzname);
+            Object o = c.newInstance();
+            if(o instanceof WebApplicationException){
+                ResponseCode rc = new ResponseCode();
+                Response res = ((WebApplicationException)o).getResponse();
+                rc.setCode(res.getStatus());
+                rc.setCondition(getJavaDoc().get("throws").toString());
+                statusCodes.add(rc);
+            }
+        } catch (ClassNotFoundException cnf){  
+            System.err.println(cnf.getMessage());
+        } catch (InstantiationException ie){           
+            System.err.println(ie.getMessage());
+        } catch (IllegalAccessException iae){            
+            System.err.println(iae.getMessage());
+        }
+    }
+    
     doclets = getJavaDoc().get("HTTP"); //support jax-doclets. see http://jira.codehaus.org/browse/ENUNCIATE-690
     if (doclets != null) {
       for (String doclet : doclets) {

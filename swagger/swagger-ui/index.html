@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Swagger UI</title>
+    <title>Bisnode Service API</title>
     <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
     <link href='css/highlight.default.css' media='screen' rel='stylesheet' type='text/css'/>
     <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -23,7 +23,7 @@
                 apiKey:"",
                 dom_id:"swagger-ui-container",
                 supportHeaderParams: false,
-                supportedSubmitMethods: ['get', 'post', 'put'],
+                supportedSubmitMethods: ['get', 'post', 'put', 'head', 'options', 'delete'],
                 onComplete: function(swaggerApi, swaggerUi){
                 	if(console) {
                         console.log("Loaded SwaggerUI")
@@ -50,7 +50,7 @@
 <body>
 <div id='header'>
     <div class="swagger-ui-wrap">
-        <a id="logo" href="http://swagger.wordnik.com">swagger</a>
+        <a id="logo" href="http://www.bisnode.com">Bisnode API</a>
 
         <form id='api_selector'>
             <div class='input icon-btn'>
